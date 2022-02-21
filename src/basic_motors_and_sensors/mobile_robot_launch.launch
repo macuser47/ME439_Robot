@@ -1,0 +1,15 @@
+<launch>
+    <group ns="sensor_control">
+        <node pkg="basic_motors_and_sensors" name="sensors_node" type="sensors_node.py"/>
+        <node pkg="basic_motors_and_sensors" name="sensors_processor" type="sensors_processor.py"/>
+        <node pkg="basic_motors_and_sensors" name="encoder_reading_node" type="encoder_reading_node.py"/>
+    </group>
+    
+    <group ns="motor_control">
+        <node pkg="basic_motors_and_sensors" name="motor_node" type="motor_node.py"/> 
+        <node pkg="basic_motors_and_sensors" name="sensors_to_motor_commands_node" type="sensors_to_motor_commands_node.py"/> 
+    </group>
+</launch>
+
+
+

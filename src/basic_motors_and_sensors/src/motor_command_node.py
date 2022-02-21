@@ -6,7 +6,8 @@ ROS Node to get User Input of commands for wheel command and publish them to
 """
 
 import rospy
-from std_msgs.msg import Float32, Float32MultiArray
+from std_msgs.msg import Float32
+from basic_motors_and_sensors.msg import WheelCommands
 
 rospy.init_node("motor_command_node", anonymous=False)
 
@@ -15,10 +16,8 @@ def talker_for_wheel_commands():
 
     # Set up a Publisher
     pub_wheel_command_left = rospy.Publisher(
-        "wheel_command", Float32MultiArray, queue_size=1
+        "wheel_command", WheelCommands, queue_size=1
     )
-
-    wheel_command_msg = Float32MultiArray()
 
     while not rospy.is_shutdown():
 
@@ -41,7 +40,9 @@ def talker_for_wheel_commands():
             wheel_command_right = 480
 
         # Pack the message object and publish
-        wheel_command_msg.data = [wheel_command_left, wheel_command_right]
+        wheel_command_msg = WheelCommands(
+            left=wheel_command_left, right=wheel_command_right
+        )
         pub_wheel_command_left.publish(wheel_command_msg)
 
 
